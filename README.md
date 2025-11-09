@@ -49,7 +49,6 @@ Before collecting any data, you must manually define the new sign name (e.g., "M
 * **`data.py`**: Add the new sign name (e.g., `"More"`) to the `phrases` list so the script knows which new folder to process from **Image/** to **MP\_Data/**.
 * **`trainmodel.py`**: Add the new sign name (e.g., `"More"`) to the `phrases` list. This dynamically adds a new output category for the sign in the neural network during training.
 
----
 
 2. The 3-Step Data Pipeline
 
