@@ -36,13 +36,36 @@ Getting Started
     python app.py
     ```
 
-Capturing New Signs
 
-To add a new sign to the model's vocabulary, follow these three steps in sequence:
+Capturing and Training a New Sign: A Complete Guide
 
-1.  Capture Images: Run `collectdata.py`. When the webcam opens, press the first letter of the new sign's name on the keyboard to save raw images into the Image/ folder. Press 'q' to stop.
-2.  Extract Keypoints: Run `data.py` to convert those raw images into numeric keypoints, saving them into the **MP\_Data/** folder.
-3.  Train Model: Run `trainmodel.py` to retrain the neural network with the old and new data, updating `model.h5`.
+To add a new sign to the system's vocabulary, you need to coordinate the information across the three main Python scripts and then run them in a specific sequence. This process ensures the neural network learns the new gesture and knows what label to give it.
+
+1. Define the New Vocabulary
+
+Before collecting any data, you must manually define the new sign name (e.g., "More") in the vocabulary lists used by the scripts:
+
+* **`collectdata.py`**: Add the new sign name and the key you will press to collect its data (e.g., `'more': 'More'`). This tells the script what folder name to create in **Image/**.
+* **`data.py`**: Add the new sign name (e.g., `"More"`) to the `phrases` list so the script knows which new folder to process from **Image/** to **MP\_Data/**.
+* **`trainmodel.py`**: Add the new sign name (e.g., `"More"`) to the `phrases` list. This dynamically adds a new output category for the sign in the neural network during training.
+
+---
+
+2. The 3-Step Data Pipeline
+
+Once the vocabulary lists are updated in all three scripts, follow these steps sequentially:
+
+**Step 1: Collect Raw Images (`collectdata.py`)**
+
+* **Action**: Run `collectdata.py`. When the webcam opens, position your hand for the new sign in the frame. Press the first letter of the new sign's name on the keyboard (e.g., 'm' for "More") repeatedly to save raw images into the **Image/** folder. Press 'q' to stop.
+
+**Step 2: Extract Keypoints (`data.py`)**
+
+* **Action**: Run `data.py`. This script processes those raw images. It uses MediaPipe to translate the hand shape in every image into a 63-coordinate feature vector, saving this numerical data as a NumPy array (`.npy`) in the **MP\_Data/** folder.
+
+**Step 3: Train Model (`trainmodel.py`)**
+
+* **Action**: Run `trainmodel.py`. This script loads *all* the keypoint data (old signs + the new sign's data) from **MP\_Data/** and retrains the neural network. The model's weights are updated to recognize the expanded vocabulary, and the result is saved to `model.h5`.
 
 
 
