@@ -3,7 +3,7 @@ Sign Language Detection Project
 
 This project implements a real-time Sign Language Detection system using hand keypoint data captured via a webcam. The core goal is to interpret a set of signs and provide a foundation for expanding the vocabulary.
 
-The system currently recognizes 9 signs: Thankyou, Welcome, Hello, Bye, Peace, Yes, No, I Love You (ILoveYou), and Care.
+The system currently recognizes 9 signs: Thankyou, Welcome, Hello, Bye, Peace, Yes, No, I Love You and Care.
 
 
 
